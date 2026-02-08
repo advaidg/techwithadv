@@ -34,12 +34,21 @@ export const metadata: Metadata = {
     siteName: "techwithadv",
     locale: "en_US",
     type: "website",
+    images: [
+      {
+        url: "/images/og/default.png",
+        width: 1200,
+        height: 630,
+        alt: "techwithadv — Building AI Systems That Work",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Advaid Gireesan — Applied AI & Platform Engineer",
     description:
       "Building production-grade AI systems at the intersection of cloud platforms, backend engineering, and GenAI.",
+    images: ["/images/og/default.png"],
   },
   robots: {
     index: true,
