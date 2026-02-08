@@ -99,7 +99,7 @@ export default async function BlogPostPage({ params }: Props) {
                 src="/images/Headshot.png"
                 alt="Advaid Gireesan"
                 fill
-                className="object-cover"
+                className="object-cover object-[center_15%] scale-125"
               />
             </div>
             <div>
