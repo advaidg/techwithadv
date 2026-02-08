@@ -191,7 +191,7 @@ export const projects: Project[] = [
       "Docker Compose",
     ],
     category: "rag",
-    featured: false,
+    featured: true,
     image: "/images/projects/niotap.png",
     links: {
       website: "https://niotap.com",

@@ -1,4 +1,5 @@
 import { Hero } from "@/components/home/hero";
+import { FounderSpotlight } from "@/components/home/founder-spotlight";
 import { FeaturedProjects } from "@/components/home/featured-projects";
 import { LatestArticles } from "@/components/home/latest-articles";
 import { getAllPosts } from "@/lib/mdx";
@@ -18,6 +19,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <FounderSpotlight />
       <FeaturedProjects />
       <LatestArticles articles={articles} />
     </>
