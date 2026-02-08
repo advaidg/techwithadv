@@ -15,6 +15,11 @@ export interface Project {
   techStack: string[];
   category: ProjectCategory;
   featured: boolean;
+  image?: string;
+  links?: {
+    website?: string;
+    github?: string;
+  };
 }
 
 export const categoryLabels: Record<ProjectCategory, string> = {
@@ -187,6 +192,10 @@ export const projects: Project[] = [
     ],
     category: "rag",
     featured: false,
+    image: "/images/projects/niotap.png",
+    links: {
+      website: "https://niotap.com",
+    },
   },
   {
     slug: "research-doc-platform",

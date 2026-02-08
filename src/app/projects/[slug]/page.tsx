@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, ExternalLink, Github } from "lucide-react";
 import { projects, getProjectBySlug, categoryLabels } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Section } from "@/components/ui/section";
@@ -44,16 +45,56 @@ export default async function ProjectDetailPage({ params }: Props) {
           Back to projects
         </Link>
 
-        <div className="mb-4">
-          <Badge variant="accent">
-            {categoryLabels[project.category]}
-          </Badge>
-        </div>
+        <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+          {project.image && (
+            <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-xl border border-border bg-white p-3 sm:h-24 sm:w-24">
+              <Image
+                src={project.image}
+                alt={`${project.title} logo`}
+                fill
+                className="object-contain p-2"
+              />
+            </div>
+          )}
+          <div>
+            <div className="mb-3">
+              <Badge variant="accent">
+                {categoryLabels[project.category]}
+              </Badge>
+            </div>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              {project.title}
+            </h1>
+            <p className="mt-2 text-lg text-muted">{project.tagline}</p>
 
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          {project.title}
-        </h1>
-        <p className="mt-2 text-lg text-muted">{project.tagline}</p>
+            {project.links && (
+              <div className="mt-4 flex flex-wrap gap-3">
+                {project.links.website && (
+                  <a
+                    href={project.links.website}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-muted transition-all hover:border-accent/30 hover:text-foreground"
+                  >
+                    <ExternalLink size={14} />
+                    Visit Website
+                  </a>
+                )}
+                {project.links.github && (
+                  <a
+                    href={project.links.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-sm text-muted transition-all hover:border-accent/30 hover:text-foreground"
+                  >
+                    <Github size={14} />
+                    Source Code
+                  </a>
+                )}
+              </div>
+            )}
+          </div>
+        </div>
       </Section>
 
       <Section className="py-12">
