@@ -1,0 +1,94 @@
+---
+title: "Building Production RAG Systems: Lessons from the Field"
+date: "2025-02-01"
+description: "What I've learned building retrieval-augmented generation systems that actually work in production — beyond the tutorial demos."
+tags: ["RAG", "LLM", "Architecture"]
+---
+
+Most RAG tutorials make it look simple: chunk your documents, embed them, store them in a vector database, and query with an LLM. In practice, building a RAG system that works reliably in production is a different challenge entirely.
+
+After building multiple RAG systems — from document analysis platforms to email support assistants — here are the patterns and lessons I keep coming back to.
+
+## The Gap Between Demo and Production
+
+A demo RAG system needs to answer a few questions correctly. A production RAG system needs to:
+
+- Handle documents it's never seen before
+- Return "I don't know" when it should
+- Track where every answer came from (citations)
+- Stay within cost and latency budgets
+- Degrade gracefully when the retrieval fails
+
+These are fundamentally different requirements, and they demand different engineering decisions.
+
+## Chunking Strategy Matters More Than You Think
+
+The most impactful decision in a RAG pipeline isn't which embedding model to use — it's how you chunk your documents.
+
+I've found that **semantic chunking** (splitting based on meaning boundaries) consistently outperforms fixed-size chunking. But even more important is **metadata-aware chunking**: preserving section headers, document titles, and structural context alongside each chunk.
+
+```python
+# Instead of raw text chunks, preserve structure
+chunk = {
+    "text": "The retrieval pipeline processes...",
+    "metadata": {
+        "document": "architecture-guide.pdf",
+        "section": "Retrieval Pipeline",
+        "page": 12,
+        "chunk_index": 3
+    }
+}
+```
+
+This metadata becomes essential for citation tracking, filtering, and debugging retrieval quality issues.
+
+## Hybrid Retrieval is Worth the Complexity
+
+Pure semantic search (vector similarity) has a well-known weakness: it can miss exact keyword matches that a user expects to find. Conversely, keyword search misses semantic relationships.
+
+In production, I combine both:
+
+1. **Semantic retrieval** via vector embeddings (FAISS, pgvector)
+2. **Keyword retrieval** via BM25 or full-text search
+3. **Reciprocal rank fusion** to merge and re-rank results
+
+The improvement in recall is significant, especially for domain-specific terminology that embedding models may not handle well.
+
+## Cost and Latency Are First-Class Concerns
+
+Every LLM call has a cost. Every retrieval query has latency. In production, these add up fast.
+
+Practical strategies I use:
+
+- **Cache frequently asked queries** — many users ask similar questions
+- **Tiered retrieval** — fast keyword search first, expensive re-ranking only when needed
+- **Token budgeting** — set hard limits on context window usage per query
+- **Track everything** — log token counts, latency percentiles, and cost per query
+
+If you can't measure it, you can't optimize it.
+
+## Human-in-the-Loop is Not Optional
+
+For any RAG system where accuracy matters (and when doesn't it?), you need a human review layer:
+
+- **Confidence scoring** on retrieval results
+- **Flagging low-confidence answers** for review
+- **Feedback loops** where users can correct or validate responses
+- **Audit trails** showing which documents informed each answer
+
+This isn't just about quality — it's about trust. Users need to know they can verify and override AI outputs.
+
+## What I'd Build Differently Now
+
+If I were starting a new RAG system today, I'd prioritize:
+
+1. **Evaluation from day one** — automated tests for retrieval quality, not just "does it run"
+2. **Observability built in** — structured logging of every retrieval and generation step
+3. **Graceful degradation** — explicit handling of "no relevant documents found"
+4. **Version control for embeddings** — so you can re-index and compare quality across versions
+
+The RAG space is moving fast, but these production fundamentals stay constant regardless of which model or vector store you use.
+
+---
+
+*This is the first in a series of articles on building production AI systems. Next up: designing agentic workflows with guardrails.*
