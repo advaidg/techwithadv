@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { Section } from "@/components/ui/section";
 import { Badge } from "@/components/ui/badge";
 import { Skills } from "@/components/about/skills";
@@ -32,15 +33,28 @@ export default function AboutPage() {
     <div className="pt-32 pb-20">
       {/* Header */}
       <Section className="py-0 pb-16">
-        <p className="mb-4 text-sm font-medium uppercase tracking-widest text-accent">
-          About
-        </p>
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          Advaid Gireesan
-        </h1>
-        <p className="mt-2 text-lg text-muted">
-          Applied AI &amp; Platform Engineer
-        </p>
+        <div className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
+          <div className="relative h-24 w-24 shrink-0 overflow-hidden rounded-full border-2 border-border bg-surface sm:h-28 sm:w-28">
+            <Image
+              src="/images/Headshot.png"
+              alt="Advaid Gireesan"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div>
+            <p className="mb-2 text-sm font-medium uppercase tracking-widest text-accent">
+              About
+            </p>
+            <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+              Advaid Gireesan
+            </h1>
+            <p className="mt-1 text-lg text-muted">
+              Applied AI &amp; Platform Engineer
+            </p>
+          </div>
+        </div>
 
         <div className="mt-8 max-w-3xl space-y-4 text-base leading-relaxed text-muted">
           <p>

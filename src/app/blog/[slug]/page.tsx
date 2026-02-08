@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
@@ -93,8 +94,13 @@ export default async function BlogPostPage({ params }: Props) {
       <Section>
         <div className="mx-auto max-w-3xl rounded-xl border border-border bg-surface p-6">
           <div className="flex items-center gap-4">
-            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent/10 text-lg font-bold text-accent">
-              AG
+            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface">
+              <Image
+                src="/images/Headshot.png"
+                alt="Advaid Gireesan"
+                fill
+                className="object-cover"
+              />
             </div>
             <div>
               <p className="font-semibold text-foreground">Advaid Gireesan</p>

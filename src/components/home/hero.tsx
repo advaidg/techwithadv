@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, FileText } from "lucide-react";
@@ -14,6 +15,24 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(6,182,212,0.08)_0%,transparent_70%)]" />
 
       <div className="relative z-10 mx-auto max-w-5xl px-6 py-32 text-center">
+        {/* Headshot */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="mx-auto mb-8"
+        >
+          <div className="relative mx-auto h-28 w-28 overflow-hidden rounded-full border-2 border-border bg-surface sm:h-32 sm:w-32">
+            <Image
+              src="/images/Headshot.png"
+              alt="Advaid Gireesan"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+        </motion.div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
