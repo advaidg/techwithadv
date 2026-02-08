@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { CursorGlow } from "@/components/ui/cursor-glow";
+import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import "./globals.css";
 
 const inter = Inter({
@@ -56,9 +58,11 @@ export default function RootLayout({
         className={`${inter.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
         <div className="noise" aria-hidden="true" />
+        <CursorGlow />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

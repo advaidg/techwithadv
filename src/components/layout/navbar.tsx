@@ -23,9 +23,10 @@ export function Navbar() {
       <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-6">
         <Link
           href="/"
-          className="text-lg font-semibold tracking-tight text-foreground transition-colors hover:text-accent"
+          className="text-lg font-bold tracking-tight transition-colors"
         >
-          techwithadv
+          <span className="gradient-text">tech</span>
+          <span className="text-foreground">withadv</span>
         </Link>
 
         {/* Desktop nav */}
