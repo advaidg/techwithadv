@@ -43,13 +43,13 @@ export const mdxComponents: MDXComponents = {
     />
   ),
   p: (props) => (
-    <p className="my-4 leading-relaxed text-muted" {...props} />
+    <p className="my-4 text-[1.02rem] leading-8 text-foreground/88" {...props} />
   ),
   ul: (props) => (
-    <ul className="my-4 ml-6 list-disc space-y-2 text-muted" {...props} />
+    <ul className="my-4 ml-6 list-disc space-y-2 text-[1.02rem] text-foreground/88" {...props} />
   ),
   ol: (props) => (
-    <ol className="my-4 ml-6 list-decimal space-y-2 text-muted" {...props} />
+    <ol className="my-4 ml-6 list-decimal space-y-2 text-[1.02rem] text-foreground/88" {...props} />
   ),
   li: (props) => <li className="leading-relaxed" {...props} />,
   a: (props) => (
@@ -62,14 +62,14 @@ export const mdxComponents: MDXComponents = {
   ),
   blockquote: (props) => (
     <blockquote
-      className="my-6 border-l-2 border-border pl-4 italic text-muted"
+      className="my-6 border-l-2 border-accent/40 pl-4 text-[1.02rem] italic text-foreground/82"
       {...props}
     />
   ),
   hr: () => <hr className="my-8 border-border" />,
   table: (props) => (
     <div className="my-6 overflow-x-auto">
-      <table className="w-full text-sm text-muted" {...props} />
+      <table className="w-full text-sm text-foreground/85" {...props} />
     </div>
   ),
   th: (props) => (
