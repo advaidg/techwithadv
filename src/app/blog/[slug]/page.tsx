@@ -1,116 +1,12 @@
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { ArrowLeft,Calendar,Clock3 } from "lucide-react";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostBySlug } from "@/lib/mdx";
-import { Badge } from "@/components/ui/badge";
-import { Section } from "@/components/ui/section";
+import { getAllPosts,getPostBySlug } from "@/lib/mdx";
 import { mdxComponents } from "@/components/blog/mdx-components";
 import type { Metadata } from "next";
-
-interface Props {
-  params: Promise<{ slug: string }>;
-}
-
-export async function generateStaticParams() {
-  const posts = getAllPosts();
-  return posts.map((p) => ({ slug: p.slug }));
-}
-
-export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-  if (!post) return {};
-
-  return {
-    title: post.title,
-    description: post.description,
-    openGraph: {
-      title: post.title,
-      description: post.description,
-      type: "article",
-      publishedTime: post.date,
-    },
-  };
-}
-
-export default async function BlogPostPage({ params }: Props) {
-  const { slug } = await params;
-  const post = getPostBySlug(slug);
-
-  if (!post) {
-    notFound();
-  }
-
-  const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
-  return (
-    <div className="pt-32 pb-20">
-      <Section className="py-0 pb-8">
-        <Link
-          href="/blog"
-          className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-        >
-          <ArrowLeft size={14} />
-          Back to blog
-        </Link>
-
-        <div className="mb-4 flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
-            <Badge key={tag} variant="accent">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-
-        <h1 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-          {post.title}
-        </h1>
-
-        <div className="mt-4 flex items-center gap-4 text-sm text-muted">
-          <div className="flex items-center gap-1.5">
-            <Calendar size={14} />
-            <time dateTime={post.date}>{formattedDate}</time>
-          </div>
-          <div className="flex items-center gap-1.5">
-            <Clock size={14} />
-            <span>{post.readingTime}</span>
-          </div>
-        </div>
-      </Section>
-
-      <Section className="py-0">
-        <article className="prose-custom mx-auto max-w-3xl">
-          <MDXRemote source={post.content} components={mdxComponents} />
-        </article>
-      </Section>
-
-      {/* Author */}
-      <Section>
-        <div className="mx-auto max-w-3xl rounded-xl border border-border bg-surface p-6">
-          <div className="flex items-center gap-4">
-            <div className="relative h-12 w-12 shrink-0 overflow-hidden rounded-full border border-border bg-surface">
-              <Image
-                src="/images/Headshot.png"
-                alt="Advaid Gireesan"
-                fill
-                className="object-cover object-top"
-              />
-            </div>
-            <div>
-              <p className="font-semibold text-foreground">Advaid Gireesan</p>
-              <p className="text-sm text-muted">
-                Applied AI &amp; Platform Engineer
-              </p>
-            </div>
-          </div>
-        </div>
-      </Section>
-    </div>
-  );
-}
+interface Props{params:Promise<{slug:string}>}
+export async function generateStaticParams(){return getAllPosts().map(p=>({slug:p.slug}))}
+export async function generateMetadata({params}:Props):Promise<Metadata>{const{slug}=await params;const post=getPostBySlug(slug);return post?{title:post.title,description:post.description,openGraph:{title:post.title,description:post.description,type:"article",publishedTime:post.date}}:{}}
+export default async function BlogPostPage({params}:Props){const{slug}=await params;const post=getPostBySlug(slug);if(!post)notFound();const date=new Date(post.date).toLocaleDateString("en-US",{year:"numeric",month:"long",day:"numeric"});return <main className="pb-24 pt-28 sm:pt-36"><div className="shell"><Link href="/blog" className="inline-flex items-center gap-2 text-sm font-semibold text-muted hover:text-foreground"><ArrowLeft size={15}/>All field notes</Link><header className="mx-auto max-w-5xl py-14 text-center"><div className="flex flex-wrap justify-center gap-3">{post.tags.map(tag=><span key={tag} className="eyebrow text-accent">{tag}</span>)}</div><h1 className="mt-7 text-5xl font-semibold leading-[.95] tracking-[-.06em] sm:text-7xl">{post.title}</h1><p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted">{post.description}</p><div className="mt-7 flex items-center justify-center gap-5 text-xs text-muted"><span className="flex items-center gap-2"><Calendar size={13}/>{date}</span><span className="flex items-center gap-2"><Clock3 size={13}/>{post.readingTime}</span></div></header><div className="mx-auto max-w-3xl border-t border-black/15 pt-10"><article className="prose-custom"><MDXRemote source={post.content} components={mdxComponents}/></article><div className="mt-16 flex items-center gap-4 rounded-3xl bg-white p-6"><div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full bg-[#dbe0fb]"><Image src="/images/Headshot.png" alt="Advaid Gireesan" fill className="object-cover object-top"/></div><div><p className="font-semibold">Advaid Gireesan</p><p className="text-sm text-muted">AI Architect · Forward-Deployed Engineer</p></div></div></div></div></main>}

@@ -1,0 +1,6 @@
+"use client";
+import { motion } from "framer-motion";
+const stats = [["6+", "years in enterprise engineering"], ["300+", "practitioners in the OpenShift COE community"], ["30+", "people across multi-team delivery groups"], ["~$1M+", "programs influenced or led"], ["8h → 50m", "critical batch transformation"], ["Zero", "post-migration defects"]];
+export function HiringProfile() {
+  return <section className="overflow-hidden py-20 sm:py-28"><div className="shell"><div className="grid gap-12 border-y border-black/15 py-10 lg:grid-cols-[.45fr_1fr]"><div><p className="eyebrow text-accent">Measured in outcomes</p><p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">Enterprise work earns trust through what changes after the architecture diagram.</p></div><div className="grid gap-px overflow-hidden rounded-3xl bg-black/10 sm:grid-cols-2 lg:grid-cols-3">{stats.map(([value,label], i) => <motion.div key={value} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i*.07 }} className="min-h-40 bg-background p-6"><p className="text-4xl font-semibold tracking-[-.06em] sm:text-5xl">{value}</p><p className="mt-5 max-w-36 text-xs leading-relaxed text-muted">{label}</p></motion.div>)}</div></div></div></section>;
+}

@@ -1,7 +1,9 @@
 import { Hero } from "@/components/home/hero";
-import { FounderSpotlight } from "@/components/home/founder-spotlight";
+import { HiringProfile } from "@/components/home/hiring-profile";
 import { FeaturedProjects } from "@/components/home/featured-projects";
 import { LatestArticles } from "@/components/home/latest-articles";
+import { ContactCta } from "@/components/home/contact-cta";
+import { CareerSnapshot } from "@/components/home/career-snapshot";
 import { getAllPosts } from "@/lib/mdx";
 
 export default function Home() {
@@ -19,9 +21,11 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <FounderSpotlight />
+      <HiringProfile />
       <FeaturedProjects />
+      <CareerSnapshot />
       <LatestArticles articles={articles} />
+      <ContactCta />
     </>
   );
 }

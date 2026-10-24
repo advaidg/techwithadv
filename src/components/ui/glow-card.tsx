@@ -15,11 +15,11 @@ export function GlowCard({
   className,
   as: Component = "div",
 }: GlowCardProps) {
-  const cardRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLElement>(null);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
 
-  function handleMouseMove(e: React.MouseEvent<HTMLDivElement>) {
+  function handleMouseMove(e: React.MouseEvent<HTMLElement>) {
     if (!cardRef.current) return;
     const rect = cardRef.current.getBoundingClientRect();
     setMousePosition({
@@ -28,11 +28,13 @@ export function GlowCard({
     });
   }
 
-  const MotionComponent = motion.create(Component);
+  const MotionComponent = Component === "article" ? motion.article : motion.div;
 
   return (
     <MotionComponent
-      ref={cardRef}
+      ref={(node) => {
+        cardRef.current = node;
+      }}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}

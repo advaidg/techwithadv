@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Inter, Geist_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
-import { CursorGlow } from "@/components/ui/cursor-glow";
 import { ScrollToTop } from "@/components/ui/scroll-to-top";
 import "./globals.css";
 
@@ -20,16 +19,16 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Advaid Gireesan — Applied AI & Platform Engineer",
+    default: "Advaid Gireesan — AI Architect & Forward-Deployed Engineer",
     template: "%s | techwithadv",
   },
   description:
-    "Building production-grade AI systems at the intersection of cloud platforms, backend engineering, and GenAI. Portfolio, projects, and technical articles by Advaid Gireesan.",
+    "AI architect and hands-on engineering leader specializing in agentic AI, RAG, MCP, intelligent document processing, enterprise modernization, and cloud-native platforms.",
   metadataBase: new URL("https://techwithadv.com"),
   openGraph: {
-    title: "Advaid Gireesan — Applied AI & Platform Engineer",
+    title: "Advaid Gireesan — AI Architect & Forward-Deployed Engineer",
     description:
-      "Building production-grade AI systems at the intersection of cloud platforms, backend engineering, and GenAI.",
+      "Enterprise AI systems from discovery and proof of value to production.",
     url: "https://techwithadv.com",
     siteName: "techwithadv",
     locale: "en_US",
@@ -39,15 +38,15 @@ export const metadata: Metadata = {
         url: "/images/og/default.png",
         width: 1200,
         height: 630,
-        alt: "techwithadv — Building AI Systems That Work",
+        alt: "Advaid Gireesan — AI Architect and Forward-Deployed Engineer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Advaid Gireesan — Applied AI & Platform Engineer",
+    title: "Advaid Gireesan — AI Architect & Forward-Deployed Engineer",
     description:
-      "Building production-grade AI systems at the intersection of cloud platforms, backend engineering, and GenAI.",
+      "Enterprise AI systems from discovery and proof of value to production.",
     images: ["/images/og/default.png"],
   },
   robots: {
@@ -62,12 +61,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en">
       <body
         className={`${inter.variable} ${geistMono.variable} font-sans antialiased bg-background text-foreground`}
       >
-        <div className="noise" aria-hidden="true" />
-        <CursorGlow />
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <Footer />

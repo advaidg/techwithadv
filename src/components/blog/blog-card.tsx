@@ -1,44 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { ArrowUpRight, Calendar } from "lucide-react";
-import { GlowCard } from "@/components/ui/glow-card";
-import { Badge } from "@/components/ui/badge";
+import { ArrowUpRight,Clock3 } from "lucide-react";
 import type { BlogPostMeta } from "@/lib/mdx";
-
-export function BlogCard({ post }: { post: BlogPostMeta }) {
-  return (
-    <Link href={`/blog/${post.slug}`} className="block h-full">
-      <GlowCard className="flex h-full flex-col" as="article">
-        <div className="mb-3 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-xs text-muted">
-            <Calendar size={12} />
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </time>
-            <span>&middot;</span>
-            <span>{post.readingTime}</span>
-          </div>
-          <ArrowUpRight size={14} className="text-muted" />
-        </div>
-        <h3 className="mb-2 text-lg font-semibold text-foreground">
-          {post.title}
-        </h3>
-        <p className="mb-4 flex-1 text-sm leading-relaxed text-muted">
-          {post.description}
-        </p>
-        <div className="flex flex-wrap gap-1.5">
-          {post.tags.slice(0, 3).map((tag) => (
-            <Badge key={tag} variant="outline">
-              {tag}
-            </Badge>
-          ))}
-        </div>
-      </GlowCard>
-    </Link>
-  );
-}
+export function BlogCard({post,index=0}:{post:BlogPostMeta;index?:number}){return <Link href={`/blog/${post.slug}`} className="group grid gap-8 border-t border-black/15 py-8 md:grid-cols-[4rem_1fr_auto]"><span className="font-mono text-xs text-muted">{String(index+1).padStart(2,"0")}</span><div><div className="flex flex-wrap items-center gap-3">{post.tags.slice(0,2).map(tag=><span key={tag} className="eyebrow text-accent">{tag}</span>)}</div><h2 className="mt-4 max-w-3xl text-3xl font-semibold leading-[1.03] tracking-[-.045em] sm:text-5xl">{post.title}</h2><p className="mt-4 max-w-2xl text-sm leading-relaxed text-muted">{post.description}</p><p className="mt-5 flex items-center gap-2 text-xs text-muted"><Clock3 size={13}/>{post.readingTime}</p></div><span className="grid h-12 w-12 place-items-center rounded-full border border-black/15 transition-all group-hover:bg-foreground group-hover:text-background"><ArrowUpRight size={17}/></span></Link>}
