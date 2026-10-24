@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/og/default.png",
+        url: "/images/og/portfolio-2026.png",
         width: 1200,
         height: 630,
         alt: "Advaid Gireesan — AI Architect and Forward-Deployed Engineer",
@@ -47,7 +47,7 @@ export const metadata: Metadata = {
     title: "Advaid Gireesan — AI Architect & Forward-Deployed Engineer",
     description:
       "Enterprise AI systems from discovery and proof of value to production.",
-    images: ["/images/og/default.png"],
+    images: ["/images/og/portfolio-2026.png"],
   },
   robots: {
     index: true,
